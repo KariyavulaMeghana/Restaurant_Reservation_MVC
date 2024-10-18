@@ -1,0 +1,54 @@
+﻿@model Restaurant_Reservation_MVC.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-danger">Details</h1>
+
+<div>
+    <h4 class="text-success">Restaurant</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RestaurantID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RestaurantName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+        @* <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Rating)
+        </dd> *@
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantID }) |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Restaurant_Reservation_MVC.Models.Review>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <h3 class="text-primary">Reviews List</h3>
+    <hr class="bg-primary" />
+    <br />
+    <p>
+        <a asp-action="Create" class="btn btn-success">Create New Review</a>
+    </p>
+    @*
+    <p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p> *@
+    <h1>Index</h1>
+     @* 
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p> *@
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success </strong>@TempData["AlertMessage"]
+
+        </div>
+    }
+    <table class="table table-hover table-bordered">
+        <thead style="background-color: #007bff; color: white;">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReviewID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RestaurantID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReviewDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #e9f7ef;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReviewID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RestaurantID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReviewDate)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ReviewID" class="btn btn-sm btn-primary">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ReviewID" class="btn btn-sm btn-info">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ReviewID" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

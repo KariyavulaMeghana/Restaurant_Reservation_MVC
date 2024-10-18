@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Restaurant_Reservation_MVC.Models.Restaurant>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-primary">Restaurant List</h3> 
+<hr class="bg-primary" />  
+<br />
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Restaurant</a> 
+</p>
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>@TempData["AlertMessage"] - Success!</strong> 
+    </div>
+}
+
+<table class="table table-hover table-bordered">
+    <thead style="background-color: #007bff; color: white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestaurantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: #e9f7ef;">
+                <!-- Light green background for table rows -->
+                <td>
+                    @Html.DisplayFor(modelItem => item.RestaurantID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RestaurantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RestaurantID" class="btn btn-info btn-sm">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.RestaurantID" class="btn btn-primary btn-sm">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.RestaurantID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

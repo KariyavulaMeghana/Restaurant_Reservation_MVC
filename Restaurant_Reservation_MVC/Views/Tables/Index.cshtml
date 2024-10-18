@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Restaurant_Reservation_MVC.DTO.TableDtoDisplay>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-hover table-bordered">
+    <thead style="background-color: #007bff; color: white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TableId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfTables)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBooked)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: #e9f7ef;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TableId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoOfTables)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsBooked)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TableId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TableId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TableId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
