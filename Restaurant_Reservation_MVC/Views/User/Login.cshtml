@@ -1,48 +1,158 @@
 ﻿@model Restaurant_Reservation_MVC.Models.LoginModel
-
 @{
     ViewData["Title"] = "Login";
 }
-
-@if (TempData["SuccessMessage"] != null)
-
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
-
-<h1>Login</h1>
-
-<h4>LoginModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container">
+    <div class="form-container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success text-center">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        <h1>Login</h1>
+        <h4>Please enter your credentials</h4>
+        <hr />
         <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <input asp-for="Username" class="form-control" placeholder="Enter your username" />
+                <span asp-validation-for="Username" class="text-danger"></span> <!-- Error message below -->
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                <span asp-validation-for="Password" class="text-danger"></span> <!-- Error message below -->
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="Login" class="btn btn-primary btn-block" />
             </div>
         </form>
+        <a href="#" class="back-to-list">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    /* Global Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Container */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Form Wrapper */
+    .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        text-align: center;
+    }
+
+    /* Heading Styles */
+    h1 {
+        font-size: 2rem;
+        color: #343a40;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+
+    hr {
+        margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .form-control {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s;
+        width: 100%; /* Ensures that input fields take up 100% of the form container */
+    }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+        }
+
+    /* Ensure error messages are displayed below the input fields */
+    .text-danger {
+        font-size: 0.9rem;
+        color: #e3342f;
+        display: block; /* Make sure it's treated as a block element */
+        margin-top: 5px; /* Adds spacing between input and error message */
+        text-align: left; /* Aligns the error message to the left */
+    }
+
+    /* Button Styles */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        width: 100%; /* Makes the login button take up the same width as the input fields */
+        padding: 10px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    /* Back to List Link */
+    .back-to-list {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .back-to-list:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+
+</style>

@@ -1,0 +1,21 @@
+﻿@model Restaurant_Reservation_MVC.Models.AdminDashBoard;
+@{
+    ViewData["Title"] = "Owner Dashboard";
+}
+
+<h2>Owner Dashboard</h2>
+
+<nav>
+    <ul>
+        <li><a asp-action="Index" asp-controller="User">User List</a></li>
+        <li><a asp-action="Index" asp-controller="Restaurants">Restaurants</a></li>
+        <li><a asp-action="Index" asp-controller="Reservations">View Reservations</a></li>
+        <li><a asp-action="Index" asp-controller="Review">View Reviews</a></li>
+        <li><a asp-action="Index" asp-controller="MenuItems">View MenuItems</a></li>
+        <li><a asp-action="Index" asp-controller="Menus">View Menus</a></li>
+        @* <li><a asp-action="Index" asp-controller="Review">View Reviews</a></li> *@
+        <!-- Add other options as needed -->
+    </ul>
+</nav>
+
+<p>Welcome to the Owner Dashboard!</p>
