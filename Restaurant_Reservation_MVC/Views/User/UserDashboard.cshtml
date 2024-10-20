@@ -1,0 +1,56 @@
+﻿@* @model Restaurant_Reservation_MVC.Models.UserDashboard;
+@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+<h2>User Dashboard</h2>
+
+<nav>
+    <ul>
+        <li><a asp-action="Index" asp-controller="Restaurants">Restaurants</a></li>
+        <li>
+            <h3>Search Restaurant by ID</h3>
+            <form asp-action="UserDashboard" method="get" class="form-inline">
+                <div class="form-group">
+                    <label for="restaurantId">Restaurant ID:</label>
+                    <input type="number" name="restaurantId" id="restaurantId" class="form-control" placeholder="Enter Restaurant ID" />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            @* @if (Model.SearchRestaurantById != null)
+            {
+                <div class="mt-4">
+                    <h4>Restaurant Details</h4>
+                    <p><strong>Name:</strong> @Model.SearchRestaurantById.RestaurantName</p>
+                    <p><strong>Location:</strong> @Model.SearchRestaurantById.Location</p>
+                    <p><strong>Cuisine:</strong> @Model.SearchRestaurantById.ContactNumber</p>
+                    <p><strong>Rating:</strong> @Model.SearchRestaurantById.Description</p>
+                </div>
+            } 
+        </li>
+    </ul>
+</nav>
+
+<p>Welcome to the User Dashboard!</p> *@
+@model Restaurant_Reservation_MVC.Models.AdminDashBoard;
+@{
+    ViewData["Title"] = "Owner Dashboard";
+}
+
+<h2>Owner Dashboard</h2>
+
+<nav>
+    <ul>
+        <li><a asp-action="Index" asp-controller="User">User List</a></li>
+        <li><a asp-action="Index" asp-controller="Restaurants">Restaurants</a></li>
+        @* <li><a asp-action="Index" asp-controller="Reservations">View Reservations</a></li>
+        <li><a asp-action="Index" asp-controller="Review">View Reviews</a></li>
+        <li><a asp-action="Index" asp-controller="MenuItems">View MenuItems</a></li>
+        <li><a asp-action="Index" asp-controller="Menus">View Menus</a></li> *@
+        @* <li><a asp-action="Index" asp-controller="Review">View Reviews</a></li> *@
+        <!-- Add other options as needed -->
+    </ul>
+</nav>
+
+<p>Welcome to the Owner Dashboard!</p>

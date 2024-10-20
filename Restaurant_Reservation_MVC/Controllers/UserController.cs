@@ -67,19 +67,18 @@ namespace Restaurant_Reservation_MVC.Controllers
 
                 if (result.Message == "Login successful")
                 {
-                    if (result.Role == "Owner") // Check if role is Owner
+                    if (result.Role == "Admin") // Check if role is Owner
                     {
-                        return RedirectToAction("OwnerDashboard", "Dashboard"); // Redirect to Owner Dashboard
+                        //return RedirectToAction("OwnerDashboard", "Dashboard"); // Redirect to Owner Dashboard
+                        return View("AdminDashboard");
                     }
-                    else if (result.Role == "Admin")
+                    else if (result.Role == "User")
                     {
-                        return RedirectToAction("AdminDashboard", "Dashboard"); // Redirect to Admin Dashboard
+                        //return RedirectToAction("AdminDashboard", "Dashboard"); // Redirect to Admin Dashboard
+                        return View("UserDashboard");
                     }
                     // Add more roles as needed
-                    else
-                    {
-                        return RedirectToAction("UserDashboard", "Dashboard"); // Redirect to User Dashboard
-                    }
+                    
                 }
 
                 ModelState.AddModelError("", result.Message);
