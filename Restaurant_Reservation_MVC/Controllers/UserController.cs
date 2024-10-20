@@ -39,6 +39,24 @@ namespace Restaurant_Reservation_MVC.Controllers
         }
 
         // POST: User/Login
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Login(LoginModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await _userServices.Login(model);
+        //        if (result == "Login successful")
+        //        {
+
+        //            TempData["SuccessMessage"] = "Login successful!";
+        //            //return View("Index");
+        //            return RedirectToAction("Index");
+        //        }
+        //        ModelState.AddModelError("", result);
+        //    }
+        //    return View(model);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
@@ -46,16 +64,29 @@ namespace Restaurant_Reservation_MVC.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _userServices.Login(model);
-                if (result == "Login successful")
+
+                if (result.Message == "Login successful")
                 {
-                    //return RedirectToAction("Index");
-                    TempData["SuccessMessage"] = "Login successful!";
-                    return View("Login");
+                    if (result.Role == "Owner") // Check if role is Owner
+                    {
+                        return RedirectToAction("OwnerDashboard", "Dashboard"); // Redirect to Owner Dashboard
+                    }
+                    else if (result.Role == "Admin")
+                    {
+                        return RedirectToAction("AdminDashboard", "Dashboard"); // Redirect to Admin Dashboard
+                    }
+                    // Add more roles as needed
+                    else
+                    {
+                        return RedirectToAction("UserDashboard", "Dashboard"); // Redirect to User Dashboard
+                    }
                 }
-                ModelState.AddModelError("", result);
+
+                ModelState.AddModelError("", result.Message);
             }
             return View(model);
         }
+
 
 
         // GET: User/Register
@@ -77,7 +108,10 @@ namespace Restaurant_Reservation_MVC.Controllers
                     var result = await _userServices.RegisterNewUser(user);
                     if (result == "User added successfully")
                     {
-                        return RedirectToAction("Index");
+                        TempData["SuccessMessage"] = "Registered successful!";
+                        //return RedirectToAction("Home/Index");
+                        return RedirectToAction("Index", "Home");
+
                     }
                     ModelState.AddModelError("", result);
                 }
@@ -87,6 +121,55 @@ namespace Restaurant_Reservation_MVC.Controllers
                 }
             }
             return View(user);
+        }
+
+        //GET: User/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var user = await _userServices.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: User/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userServices.UpdateUser(id, user);
+                if (result == "User updated successfully")
+                {
+                    return RedirectToAction("Index");
+                }
+                ModelState.AddModelError("", result);
+            }
+            return View(user);
+        }
+        // GET: User/Delete/5
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await _userServices.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: User/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _userServices.DeleteUser(id);
+            return RedirectToAction("Index");
         }
     }
 }
