@@ -16,9 +16,9 @@ namespace Restaurant_Reservation_MVC.Models
         [Required(ErrorMessage = "enter your location")]
         public string? Location { get; set; }
         [Required(ErrorMessage = "enter your PhoneNumber")]
-        [Phone(ErrorMessage = "Invaid phone number")]
+        [Phone(ErrorMessage = "Invalid phone number")]
         public string? ContactNumber { get; set; }
         public double Rating { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
+
     }
 }

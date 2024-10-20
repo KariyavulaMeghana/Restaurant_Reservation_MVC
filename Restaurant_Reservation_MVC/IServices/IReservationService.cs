@@ -1,4 +1,5 @@
-﻿using Restaurant_Reservation_MVC.Models;
+﻿using Restaurant_Reservation_MVC.DTO;
+using Restaurant_Reservation_MVC.Models;
 
 namespace Restaurant_Reservation_MVC.IServices
 {
@@ -8,7 +9,7 @@ namespace Restaurant_Reservation_MVC.IServices
         Task<string> UpdateReservationAsync(int id, Reservation updatedReservation);
         Task<string> CancelReservationAsync(int id);
         Task<List<Reservation>> GetAllReservationsAsync();
-        Task<Reservation?> GetReservationByIdAsync(int id);
+        Task<ReservationDTO?> GetReservationByIdAsync(int id);
         Task<List<Reservation>> GetReservationsByUserIdAsync(int userId);
         Task<List<Reservation>> GetReservationsByRestaurantIdAsync(int restaurantId);
         Task<List<Reservation>> GetReservationsByDateAsync(DateTime date);
