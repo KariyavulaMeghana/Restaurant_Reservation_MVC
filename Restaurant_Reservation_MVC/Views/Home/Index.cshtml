@@ -72,14 +72,14 @@
 
 					<!-- nav -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.html">Home</a></li>
+						@*  <li><a href="index.html">Home</a></li> *@
 						@* <li><a href="index.html#about">About</a></li>
 						<li><a href="index.html#menu">Menu</a></li>
 						<li><a href="index.html#reservation">Reservation</a></li> *@
 						<!-- <li><a href="index.html#gallery">Gallery</a></li> -->
 						@* <li><a href="index.html#events">Events</a></li>
 						<li><a href="index.html#contact">Contact</a></li> *@
-						<li class="nav-item">
+						@* <li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
 
 						</li>
@@ -105,8 +105,10 @@
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Index">Review</a>
+						</li> *@
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 						</li>
-						<li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
 						</li>
@@ -117,14 +119,14 @@
 					</ul>
 					<!-- /nav -->
 					<!-- button nav -->
-					<ul class="cta-nav">
+					@* <ul class="cta-nav">
 						<li><a href="index.cshtml#user" class="main-button">Login</a></li>
-					</ul>
+					</ul> *@
 					<!-- button nav -->
 					<!-- contact nav -->
 					<ul class="contact-nav nav navbar-nav">
-						<li><a href="tel:0455481497"><i class="fa fa-phone"></i> 045-548-14-97</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 3685 Granville Lane</a></li>
+						<li><a href="tel:0455481497"><i class="fa fa-phone"></i> 040-86412362</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i>Bhanshankari Bengalore</a></li>
 					</ul>
 					<!-- contact nav -->
 
