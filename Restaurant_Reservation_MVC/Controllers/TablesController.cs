@@ -133,12 +133,13 @@ namespace Restaurant_Reservation_MVC.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var availableTables = JsonConvert.DeserializeObject<List<TableDto>>(jsonData);
+                var availableTables = JsonConvert.DeserializeObject<List<TableDtoDisplay>>(jsonData);
                 TempData["AlertMessage"] = "Table availability checked.";
-                return View(availableTables);
+                return View("CheckAvailability", availableTables);  // Use the name of your view here
             }
+
             TempData["AlertMessage"] = "Failed to check table availability.";
-            return View(new List<TableDto>());
+            return View("CheckAvailability", new List<TableDtoDisplay>());  // Same view
         }
 
         // GET: TablesController/ByRestaurant/{restaurantId}

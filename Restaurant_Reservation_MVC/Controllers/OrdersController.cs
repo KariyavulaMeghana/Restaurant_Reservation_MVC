@@ -67,6 +67,27 @@ namespace Restaurant_Reservation_MVC.Controllers
             return View(orderDto);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> PlaceOrder()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PlaceOrder(OrderDto orderDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var jsonContent = JsonConvert.SerializeObject(orderDto);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync(_apiUrl, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["AlertMessage"] = "Order placed successfully.";
+                    return View("UserDashboard");
+                }
+            }
+            return View(orderDto);
+        }
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int id)
         {

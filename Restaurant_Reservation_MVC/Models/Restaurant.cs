@@ -9,7 +9,7 @@ namespace Restaurant_Reservation_MVC.Models
         public int RestaurantID { get; set; }
         [Required(ErrorMessage = "Enter your Name")]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "name should contains 3 to 15 chars")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "only letters are allowed")]
+        [RegularExpression(@"^[0-9a-zA-Z]+$", ErrorMessage = "only letters and numbers  are allowed")]
         public string? RestaurantName { get; set; }
         [Required(ErrorMessage = "enter description")]
         public string? Description { get; set; }

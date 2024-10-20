@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Restaurant_Reservation_MVC.DTO.MenuDTO>
+
+@{
+    ViewBag.Title = "Menus by Restaurant";
+}
+
+<h2>Menus for Restaurant</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>MenuID</th>
+                <th>RestaurantID</th>
+                <th>MenuItems</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var menu in Model)
+            {
+                <tr>
+                    <td>@menu.MenuId</td>
+                    <td>@menu.RestaurantId</td>
+                    <td><a asp-controller="MenuItems" asp-route-menuId="@menu.MenuId" asp-action="GetMenuItemsByMenuId">MenuItems</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No menus found for this restaurant.</p>
+}
