@@ -120,5 +120,45 @@ namespace Restaurant_Reservation_MVC.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMenusByRestaurantId(int restaurantId)
+        {
+            try
+            {
+                // Make an HTTP GET request to the API endpoint to get menus by restaurant ID
+                var response = await _httpClient.GetAsync($"{_apiUrl}{restaurantId}");
+
+                // Check if the response is successful
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+
+                    if (jsonData.TrimStart().StartsWith("["))
+                    {
+                        // If the JSON is an array, deserialize as List<MenuDTO>
+                        var menus = JsonConvert.DeserializeObject<List<MenuDTO>>(jsonData);
+                        return View(menus ?? new List<MenuDTO>());
+                    }
+                    else
+                    {
+                        // If the JSON is a single object, deserialize as MenuDTO and put it into a list
+                        var menu = JsonConvert.DeserializeObject<MenuDTO>(jsonData);
+                        return View(menu != null ? new List<MenuDTO> { menu } : new List<MenuDTO>());
+                    }
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to load menus.";
+                    return View(new List<MenuDTO>());
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if necessary
+                TempData["ErrorMessage"] = $"An error occurred: {ex.Message}";
+                return View(new List<MenuDTO>());
+            }
+        }
+
     }
 }

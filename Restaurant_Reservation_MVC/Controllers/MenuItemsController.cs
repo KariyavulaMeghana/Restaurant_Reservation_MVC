@@ -123,5 +123,20 @@ namespace Restaurant_Reservation_MVC.Controllers
             return View();
 
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMenuItemsByMenuId(int menuId)
+        {
+            var response = await _httpClient.GetAsync($"{_apiUrl}menu/{menuId}");  // Adjust URL as per your API routing
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var menuItems = JsonConvert.DeserializeObject<List<MenuItemDTO>>(jsonData);
+                return View(menuItems);  // Pass the menu items to the view
+            }
+
+            TempData["ErrorMessage"] = "Failed to load menu items.";
+            return View(new List<MenuItemDTO>());
+        }
+
     }
 }

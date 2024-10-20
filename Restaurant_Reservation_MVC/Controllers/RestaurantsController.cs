@@ -146,5 +146,30 @@ namespace Restaurant_Reservation_MVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> SearchByLocation()
+        {
+            return View();
+        }
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> SearchByLocation(string location)
+        {
+            try
+            {
+                var restaurantList = await _restaurantService.GetRestaurantByLocation(location.ToLower());
+                if (restaurantList == null || restaurantList.Count == 0)
+                {
+                    TempData["ErrorMessage"] = "No restaurants found for the specified location.";
+                    return View(new List<Restaurant>());
+                }
+                return View("RestaurantList", restaurantList); // Redirect to a new view showing the list of restaurants
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Failed to load restaurants.";
+                return View(new List<Restaurant>());
+            }
+        }
     }
 }
