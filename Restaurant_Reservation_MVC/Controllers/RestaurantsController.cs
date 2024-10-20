@@ -12,6 +12,7 @@ namespace Restaurant_Reservation_MVC.Controllers
         {
             _restaurantService = restaurantService;
         }
+
         public async Task<IActionResult> Index()
         {
             try

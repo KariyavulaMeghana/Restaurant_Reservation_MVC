@@ -3,10 +3,12 @@ using Restaurant_Reservation_MVC.IServices;
 using Restaurant_Reservation_MVC.Models;
 using System.Text.Json;
 using System.Text;
+using Restaurant_Reservation_MVC.DTO;
+
 
 namespace Restaurant_Reservation_MVC.Services
 {
-      public class ReservationService : IReservationService
+    public class ReservationService : IReservationService
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _config;
@@ -66,13 +68,49 @@ namespace Restaurant_Reservation_MVC.Services
         //    var responseStream = await response.Content.ReadAsStreamAsync();
         //    return await JsonSerializer.DeserializeAsync<Reservation>(responseStream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         //}
-        public async Task<Reservation?> GetReservationByIdAsync(int id)
+        public async Task<ReservationDTO?> GetReservationByIdAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{_apiUrl}{id}");
-            response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error Response: {errorResponse}");
+                return null;
+            }
 
             var jsonString = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Reservation>(jsonString);
+            Console.WriteLine($"Raw JSON Response: {jsonString}"); // Log the raw response
+
+            // Check if the response is empty or contains non-JSON content
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                Console.WriteLine("Empty or null JSON response.");
+                return null;
+            }
+
+            // Basic check to ensure the response starts with '{' (object) or '[' (array)
+            if (!jsonString.TrimStart().StartsWith("{") && !jsonString.TrimStart().StartsWith("["))
+            {
+                Console.WriteLine("Non-JSON response detected. Response content:");
+                Console.WriteLine(jsonString);
+                return null;
+            }
+
+            try
+            {
+                // Deserialize the JSON array and get the first element as a single ReservationDTO
+                var reservationList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ReservationDTO>>(jsonString);
+                return reservationList?.FirstOrDefault(); // Return the first reservation or null
+            }
+
+            catch (Exception ex)
+            {
+                // Log any other unexpected errors
+                // Log any other unexpected errors
+                Console.WriteLine($"Unexpected Error: {ex.Message}");
+                return null;
+            }
         }
 
 
