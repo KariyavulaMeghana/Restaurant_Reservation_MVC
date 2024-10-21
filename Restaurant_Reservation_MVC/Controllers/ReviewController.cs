@@ -143,5 +143,25 @@ namespace Restaurant_Reservation_MVC.Controllers
             TempData["ErrorMessage"] = "Failed to delete review.";
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> GetReviewsByRestaurantId(int restaurantId)
+        {
+            try
+            {
+                var reviews = await _reviewService.GetReviewsByRestaurantId(restaurantId);
+                if (reviews == null || !reviews.Any())
+                {
+                    TempData["ErrorMessage"] = "No reviews found for this restaurant.";
+                    return View(new List<Review>());
+                }
+                return View(reviews);
+            }
+            catch (HttpRequestException ex)
+            {
+                TempData["ErrorMessage"] = $"Failed to load reviews. {ex.Message}";
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
