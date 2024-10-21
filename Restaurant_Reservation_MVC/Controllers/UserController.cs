@@ -170,5 +170,15 @@ namespace Restaurant_Reservation_MVC.Controllers
             var result = await _userServices.DeleteUser(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // Clear the session to log the user out
+            HttpContext.Session.Clear();
+
+            // Redirect to the Home/Index after logging out
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
