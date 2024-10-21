@@ -70,8 +70,9 @@ else
                     <td>@restaurant.Description</td>
                     <td>@restaurant.Location</td>
                     <td>@restaurant.ContactNumber</td>
-                    <td>@restaurant.Rating</td>
+                    @* <td>@restaurant.Rating</td> *@
                     <td><a class="menu-link" asp-controller="Menus" asp-route-restaurantId="@restaurant.RestaurantID" asp-action="GetMenusByRestaurantId">View Menu</a></td>
+                    <td><a class="menu-link" asp-controller="Review" asp-route-restaurantId="@restaurant.RestaurantID" asp-action="GetReviewsByRestaurantId">Reviews</a></td>
                 </tr>
             }
         </tbody>
