@@ -1,49 +1,75 @@
-﻿@model Restaurant_Reservation_MVC.Models.Restaurant
+﻿@*  @model Restaurant_Reservation_MVC.Models.Restaurant
+
+ @{
+     ViewData["Title"] = "SearchByLocation";
+ }
+ *@
+
+@*
+ <h1 class="text-primary">SearchByLocation</h1>
+
+ <h4 class="text-success">Restaurant Details</h4>
+ <hr />
+ <div class="row">
+     <div class="col-md-4">
+         <form asp-action="SearchByLocation">
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+
+             <div class="form-group">
+                 <label asp-for="Location" class="control-label"></label>
+                 <input asp-for="Location" class="form-control" />
+                 <span asp-validation-for="Location" class="text-danger"></span>
+             </div>
+
+
+             <div class="form-group">
+                 <input type="submit" value="SearchByLocation" class="btn btn-primary" />
+             </div>
+         </form>
+     </div>
+ </div>
+
+ <div>
+     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+ </div>
+
+ @section Scripts {
+     @{
+         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+     }
+ }
+
+ *@
+
+ @model Restaurant_Reservation_MVC.Models.Restaurant
 
 @{
     ViewData["Title"] = "SearchByLocation";
 }
 
-@* @if (TempData["AlertMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["AlertMessage"]
-        <strong>Success!</strong>
-    </div>
-} *@
+<h1 class="page-title">Search By Location</h1>
 
-<h1 class="text-primary">SearchByLocation</h1>
-
-<h4 class="text-success">Restaurant Details</h4>
+<h4 class="section-title">Restaurant Details</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="SearchByLocation">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-container">
+    <form asp-action="SearchByLocation">
+        <div class="form-group">
+            <label asp-for="Location" class="label"></label>
+            <input asp-for="Location" class="input-field" placeholder="Enter location..." />
+            <span asp-validation-for="Location" class="error-message"></span>
+        </div>
 
-            @* <div class="form-group">
-            <label asp-for="RestaurantID" class="control-label"></label>
-            <input asp-for="RestaurantID" class="form-control" />
-            <span asp-validation-for="RestaurantID" class="text-danger"></span>
-            </div> *@
-
-
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <input type="submit" value="SearchByLocation" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <input type="submit" value="Search By Location" class="submit-btn" />
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<div class="back-link">
+    <a asp-action="Index" class="back-btn">Back to List</a>
 </div>
 
 @section Scripts {
@@ -51,3 +77,119 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    /* Reset default margin and padding */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: flex-start;
+        padding-top: 50px; /* Ensures space between the top and the heading */
+    }
+
+    /* Page title styling */
+    .page-title {
+        font-size: 28px;
+        color: #007bff;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Section title styling */
+    .section-title {
+        font-size: 20px;
+        color: #28a745;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Form container styling for centering */
+    .form-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    /* Form group styling */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Label styling */
+    .label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    /* Input field styling */
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    /* Error message styling */
+    .error-message {
+        color: red;
+        font-size: 12px;
+    }
+
+    /* Submit button styling */
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+    /* Back link button styling */
+    .back-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+    /* Center the back link */
+    .back-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>

@@ -18,6 +18,5 @@ namespace Restaurant_Reservation_MVC.DTO
             public string? Address { get; set; }
             [Required]
             public string? Role { get; set; }
-        
     }
 }

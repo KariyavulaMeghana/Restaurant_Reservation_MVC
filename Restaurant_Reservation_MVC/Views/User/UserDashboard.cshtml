@@ -3,60 +3,127 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @* <title>@ViewData["Title"] - Restaurant_API_IN_MVC</title> *@
+    <title>Restaurant API in MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Restaurant_API_IN_MVC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light shadow-sm">
             <div class="container-fluid">
-                @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Restaurant_API_IN_MVC</a> *@
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index">Restaurant Finder</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                         <li class="nav-item">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Restaurants" asp-action="SearchByLocation">Search Restaurant</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User</a>
-
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">User</a>
-
-                        </li>
-                       @*  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
-                        </li> *@
                     </ul>
-                    <!-- /nav -->
-                    <!-- button nav -->
-                    @* <ul class="cta-nav">
-                    <li><a href="index.cshtml#user" class="main-button">Login</a></li>
-                    </ul> *@
-                    <!-- button nav -->
-                    <!-- contact nav -->
-                    <ul class="contact-nav nav navbar-nav">
-                        <li><a ><i class="fa fa-phone"></i> Logout</a></li>
-                        @* <li><a href="#"><i class="fa fa-map-marker"></i>Bhanshankari Bengalore</a></li> *@
-                    </ul>
-
-
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="User" asp-action="Logout">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    <div class="hero-section">
+        <div class="hero-content text-center">
+            <h1 class="text-white">Welcome to Restaurant Finder</h1>
+            <p class="lead text-white">Find the best restaurants near you with just a click</p>
+            @* <a href="#" class="btn btn-primary btn-lg">Explore Now</a> *@
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 Restaurant Finder. All Rights Reserved.</p>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<style>
+    /* Hero section styles */
+    .hero-section {
+        background-image: url('https://source.unsplash.com/1600x900/?restaurant');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Adding a dark overlay */
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .btn {
+            padding: 15px 30px;
+            font-size: 1.25rem;
+            border-radius: 5px;
+        }
+
+    /* Footer styles */
+    footer {
+        background-color: #007bff;
+        color: white;
+    }
+
+    /* Navbar styles */
+    .navbar {
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .navbar .nav-link {
+            margin-right: 15px;
+        }
+
+        .navbar .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+    /* Button hover effect */
+    .hero-content .btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transition: background-color 0.3s ease;
+    }
+
+</style>
