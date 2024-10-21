@@ -28,6 +28,7 @@
                     <td>@restaurant.ContactNumber</td>
                     <td>@restaurant.Rating</td>
                     <td><a asp-controller="Menus" asp-route-restaurantId="@restaurant.RestaurantID" asp-action="GetMenusByRestaurantId">Menu</a></td>
+                    <td><a asp-controller="Review" asp-route-restaurantId="@restaurant.RestaurantID" asp-action="GetReviewsByRestaurantId">Reviews</a></td>
                 </tr>
             }
         </tbody>
